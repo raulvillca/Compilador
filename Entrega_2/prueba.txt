@@ -1,0 +1,27 @@
+-/DECVAR
+	id3, id4:INT
+ENDDEC
+
+DEFVAR
+	id1, di2:FLOAT
+	id7, id5:INT
+	id6:STRING
+ENDDEF
+
+id7 = id5 + id4
+
+BETWEEN(id2, [3, id4+2])
+INLIST(id4, [2*id2; 3])
+/-
+-/TODO mensaje comentario/-
+
+WHILE id < 2 {
+	WRITE id3
+}
+
+IF id1 < 23 { id = 2 }
+
+IF id3 == 2 AND 3 <= id4 {
+	WRITE id3
+	WRITE "Hola mundo"
+}

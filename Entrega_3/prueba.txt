@@ -1,0 +1,43 @@
+DECVAR
+	id, id3, id4, id5, id7:INT
+	id1, id2:FLOAT
+ENDDEC
+
+-/TODO mensaje comentario/-
+
+id2 = 2
+id4 = id2
+id7 = id5 + id4
+id3 = 4
+
+INLIST(id4, [2*id2; 3])
+IF id1 < 23 { id = 2 }
+
+BETWEEN(id2, [3, id4+2])
+INLIST(id4, [2*id2; 3])
+
+
+WHILE id1 < 2 {
+	WRITE id3
+	BETWEEN(id2, [3, id4+2])
+	INLIST(id4, [2*id2; 3]) 
+	READ id5}
+IF id1 < 23 { id = 2 }
+IF id3 == 2 AND 3 <= id4 {
+	WRITE id3
+	WRITE HOLA
+ID2 = 5 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

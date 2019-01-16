@@ -1,0 +1,1 @@
+id 2 CMP BGE 8 WRITE id3 id1 23 CMP BGE 16 id 2 = id3 2 CMP BNE 30 3 id4 CMP BGT 30 WRITE id3 WRITE "Hola mundo" 

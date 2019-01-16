@@ -1,0 +1,28 @@
+DECVAR
+	id3, id4:INT
+ENDDEC
+DEFVAR
+	id1, di2:FLOAT
+	id3, id4:INT
+	id4:STRING
+ENDDEF
+-/
+id3=2
+id1=3.2
+
+id4=3+2
+/-
+
+-/TODO mensaje comentario/-
+-/
+INLIST(id4, [2*id2; 3])
+
+BETWEEN(id2, [3, id4*(2+id1)])
+
+IF id1 < 23 { id = 2 }
+
+IF id3 == 2 AND 3 <= id4 {
+	WRITE id3
+	WRITE "Hola mundo"
+}
+/-

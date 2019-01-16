@@ -1,0 +1,1285 @@
+Terminals unused in grammar
+
+   AND
+   OR
+   OP_ACUMULADOR
+   I_END
+
+
+Gramática
+
+    0 $accept: programa $end
+
+    1 programa: sentencia
+    2         | programa sentencia
+
+    3 sentencia: P_DECVAR dec_declaracion P_ENDDEC
+    4          | P_DEFVAR def_declaracion P_ENDDEF
+    5          | asignacion
+    6          | iterador
+    7          | condicional
+    8          | b_between
+    9          | b_inList
+   10          | b_write
+   11          | b_read
+
+   12 dec_declaracion: declaracion DOS_P tipo_dato
+
+   13 def_declaracion: declaracion DOS_P tipo_dato
+   14                | def_declaracion declaracion DOS_P tipo_dato
+
+   15 declaracion: ID
+   16            | declaracion COMA ID
+
+   17 tipo_dato: T_ENTERO
+   18          | T_STRING
+   19          | T_FLOTANTE
+
+   20 asignacion: ID OP_ASIG expresion
+
+   21 iterador: I_WHILE condicion LLA_A programa LLA_C
+
+   22 condicional: I_IF condicion LLA_A programa LLA_C
+   23            | I_IF condicion LLA_A programa LLA_C I_ELSE LLA_A programa LLA_C
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion COMA expresion COR_C PAR_C
+
+   25 b_inList: P_INLIST PAR_A ID COMA COR_A lista COR_C PAR_C
+
+   26 b_write: P_WRITE C_CADENA
+   27        | P_WRITE ID
+
+   28 b_read: P_READ ID
+
+   29 lista: expresion
+   30      | lista PUNTO_COMA expresion
+
+   31 comparador: expresion cmp expresion
+
+   32 condicion: comparador
+   33          | comparador operador comparador
+
+   34 operador: OP_LOG_AND
+   35         | OP_LOG_OR
+
+   36 cmp: OP_CMP_mI
+   37    | OP_CMP_MI
+   38    | OP_CMP_m
+   39    | OP_CMP_M
+   40    | OP_CMP_IGUAL
+
+   41 expresion: termino
+   42          | expresion OP_SUM termino
+   43          | expresion OP_RES termino
+
+   44 termino: factor
+   45        | termino OP_MULT factor
+   46        | termino OP_DIV factor
+
+   47 factor: ID
+   48       | C_ENTERO
+   49       | C_FLOTANTE
+   50       | C_CADENA
+   51       | PAR_A expresion PAR_C
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+ID (258) 15 16 20 24 25 27 28 47
+OP_SUM (259) 42
+OP_RES (260) 43
+OP_MULT (261) 45
+OP_DIV (262) 46
+AND (263)
+OR (264)
+COR_A (265) 24 25
+COR_C (266) 24 25
+PAR_A (267) 24 25 51
+PAR_C (268) 24 25 51
+LLA_A (269) 21 22 23
+LLA_C (270) 21 22 23
+PUNTO_COMA (271) 30
+COMA (272) 16 24 25
+DOS_P (273) 12 13 14
+OP_ASIG (274) 20
+OP_ACUMULADOR (275)
+OP_LOG_AND (276) 34
+OP_LOG_OR (277) 35
+I_WHILE (278) 21
+I_END (279)
+I_IF (280) 22 23
+I_ELSE (281) 23
+C_FLOTANTE (282) 49
+C_CADENA (283) 26 50
+C_ENTERO (284) 48
+P_WRITE (285) 26 27
+P_READ (286) 28
+P_DECVAR (287) 3
+P_ENDDEC (288) 3
+P_DEFVAR (289) 4
+P_ENDDEF (290) 4
+P_INLIST (291) 25
+P_BETWEEN (292) 24
+OP_CMP_mI (293) 36
+OP_CMP_MI (294) 37
+OP_CMP_m (295) 38
+OP_CMP_M (296) 39
+OP_CMP_IGUAL (297) 40
+T_ENTERO (298) 17
+T_FLOTANTE (299) 19
+T_STRING (300) 18
+
+
+No terminales con las reglas donde aparecen
+
+$accept (46)
+    en la izquierda: 0
+programa (47)
+    en la izquierda: 1 2, en la derecha: 0 2 21 22 23
+sentencia (48)
+    en la izquierda: 3 4 5 6 7 8 9 10 11, en la derecha: 1 2
+dec_declaracion (49)
+    en la izquierda: 12, en la derecha: 3
+def_declaracion (50)
+    en la izquierda: 13 14, en la derecha: 4 14
+declaracion (51)
+    en la izquierda: 15 16, en la derecha: 12 13 14 16
+tipo_dato (52)
+    en la izquierda: 17 18 19, en la derecha: 12 13 14
+asignacion (53)
+    en la izquierda: 20, en la derecha: 5
+iterador (54)
+    en la izquierda: 21, en la derecha: 6
+condicional (55)
+    en la izquierda: 22 23, en la derecha: 7
+b_between (56)
+    en la izquierda: 24, en la derecha: 8
+b_inList (57)
+    en la izquierda: 25, en la derecha: 9
+b_write (58)
+    en la izquierda: 26 27, en la derecha: 10
+b_read (59)
+    en la izquierda: 28, en la derecha: 11
+lista (60)
+    en la izquierda: 29 30, en la derecha: 25 30
+comparador (61)
+    en la izquierda: 31, en la derecha: 32 33
+condicion (62)
+    en la izquierda: 32 33, en la derecha: 21 22 23
+operador (63)
+    en la izquierda: 34 35, en la derecha: 33
+cmp (64)
+    en la izquierda: 36 37 38 39 40, en la derecha: 31
+expresion (65)
+    en la izquierda: 41 42 43, en la derecha: 20 24 29 30 31 42 43
+    51
+termino (66)
+    en la izquierda: 44 45 46, en la derecha: 41 42 43 45 46
+factor (67)
+    en la izquierda: 47 48 49 50 51, en la derecha: 44 45 46
+
+
+estado 0
+
+    0 $accept: . programa $end
+
+    ID         desplazar e ir al estado 1
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    programa     ir al estado 10
+    sentencia    ir al estado 11
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 1
+
+   20 asignacion: ID . OP_ASIG expresion
+
+    OP_ASIG  desplazar e ir al estado 19
+
+
+estado 2
+
+   21 iterador: I_WHILE . condicion LLA_A programa LLA_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    comparador  ir al estado 25
+    condicion   ir al estado 26
+    expresion   ir al estado 27
+    termino     ir al estado 28
+    factor      ir al estado 29
+
+
+estado 3
+
+   22 condicional: I_IF . condicion LLA_A programa LLA_C
+   23            | I_IF . condicion LLA_A programa LLA_C I_ELSE LLA_A programa LLA_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    comparador  ir al estado 25
+    condicion   ir al estado 30
+    expresion   ir al estado 27
+    termino     ir al estado 28
+    factor      ir al estado 29
+
+
+estado 4
+
+   26 b_write: P_WRITE . C_CADENA
+   27        | P_WRITE . ID
+
+    ID        desplazar e ir al estado 31
+    C_CADENA  desplazar e ir al estado 32
+
+
+estado 5
+
+   28 b_read: P_READ . ID
+
+    ID  desplazar e ir al estado 33
+
+
+estado 6
+
+    3 sentencia: P_DECVAR . dec_declaracion P_ENDDEC
+
+    ID  desplazar e ir al estado 34
+
+    dec_declaracion  ir al estado 35
+    declaracion      ir al estado 36
+
+
+estado 7
+
+    4 sentencia: P_DEFVAR . def_declaracion P_ENDDEF
+
+    ID  desplazar e ir al estado 34
+
+    def_declaracion  ir al estado 37
+    declaracion      ir al estado 38
+
+
+estado 8
+
+   25 b_inList: P_INLIST . PAR_A ID COMA COR_A lista COR_C PAR_C
+
+    PAR_A  desplazar e ir al estado 39
+
+
+estado 9
+
+   24 b_between: P_BETWEEN . PAR_A ID COMA COR_A expresion COMA expresion COR_C PAR_C
+
+    PAR_A  desplazar e ir al estado 40
+
+
+estado 10
+
+    0 $accept: programa . $end
+    2 programa: programa . sentencia
+
+    $end       desplazar e ir al estado 41
+    ID         desplazar e ir al estado 1
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    sentencia    ir al estado 42
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 11
+
+    1 programa: sentencia .
+
+    $default  reduce usando la regla 1 (programa)
+
+
+estado 12
+
+    5 sentencia: asignacion .
+
+    $default  reduce usando la regla 5 (sentencia)
+
+
+estado 13
+
+    6 sentencia: iterador .
+
+    $default  reduce usando la regla 6 (sentencia)
+
+
+estado 14
+
+    7 sentencia: condicional .
+
+    $default  reduce usando la regla 7 (sentencia)
+
+
+estado 15
+
+    8 sentencia: b_between .
+
+    $default  reduce usando la regla 8 (sentencia)
+
+
+estado 16
+
+    9 sentencia: b_inList .
+
+    $default  reduce usando la regla 9 (sentencia)
+
+
+estado 17
+
+   10 sentencia: b_write .
+
+    $default  reduce usando la regla 10 (sentencia)
+
+
+estado 18
+
+   11 sentencia: b_read .
+
+    $default  reduce usando la regla 11 (sentencia)
+
+
+estado 19
+
+   20 asignacion: ID OP_ASIG . expresion
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 43
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 20
+
+   47 factor: ID .
+
+    $default  reduce usando la regla 47 (factor)
+
+
+estado 21
+
+   51 factor: PAR_A . expresion PAR_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 44
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 22
+
+   49 factor: C_FLOTANTE .
+
+    $default  reduce usando la regla 49 (factor)
+
+
+estado 23
+
+   50 factor: C_CADENA .
+
+    $default  reduce usando la regla 50 (factor)
+
+
+estado 24
+
+   48 factor: C_ENTERO .
+
+    $default  reduce usando la regla 48 (factor)
+
+
+estado 25
+
+   32 condicion: comparador .
+   33          | comparador . operador comparador
+
+    OP_LOG_AND  desplazar e ir al estado 45
+    OP_LOG_OR   desplazar e ir al estado 46
+
+    $default  reduce usando la regla 32 (condicion)
+
+    operador  ir al estado 47
+
+
+estado 26
+
+   21 iterador: I_WHILE condicion . LLA_A programa LLA_C
+
+    LLA_A  desplazar e ir al estado 48
+
+
+estado 27
+
+   31 comparador: expresion . cmp expresion
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM        desplazar e ir al estado 49
+    OP_RES        desplazar e ir al estado 50
+    OP_CMP_mI     desplazar e ir al estado 51
+    OP_CMP_MI     desplazar e ir al estado 52
+    OP_CMP_m      desplazar e ir al estado 53
+    OP_CMP_M      desplazar e ir al estado 54
+    OP_CMP_IGUAL  desplazar e ir al estado 55
+
+    cmp  ir al estado 56
+
+
+estado 28
+
+   41 expresion: termino .
+   45 termino: termino . OP_MULT factor
+   46        | termino . OP_DIV factor
+
+    OP_MULT  desplazar e ir al estado 57
+    OP_DIV   desplazar e ir al estado 58
+
+    $default  reduce usando la regla 41 (expresion)
+
+
+estado 29
+
+   44 termino: factor .
+
+    $default  reduce usando la regla 44 (termino)
+
+
+estado 30
+
+   22 condicional: I_IF condicion . LLA_A programa LLA_C
+   23            | I_IF condicion . LLA_A programa LLA_C I_ELSE LLA_A programa LLA_C
+
+    LLA_A  desplazar e ir al estado 59
+
+
+estado 31
+
+   27 b_write: P_WRITE ID .
+
+    $default  reduce usando la regla 27 (b_write)
+
+
+estado 32
+
+   26 b_write: P_WRITE C_CADENA .
+
+    $default  reduce usando la regla 26 (b_write)
+
+
+estado 33
+
+   28 b_read: P_READ ID .
+
+    $default  reduce usando la regla 28 (b_read)
+
+
+estado 34
+
+   15 declaracion: ID .
+
+    $default  reduce usando la regla 15 (declaracion)
+
+
+estado 35
+
+    3 sentencia: P_DECVAR dec_declaracion . P_ENDDEC
+
+    P_ENDDEC  desplazar e ir al estado 60
+
+
+estado 36
+
+   12 dec_declaracion: declaracion . DOS_P tipo_dato
+   16 declaracion: declaracion . COMA ID
+
+    COMA   desplazar e ir al estado 61
+    DOS_P  desplazar e ir al estado 62
+
+
+estado 37
+
+    4 sentencia: P_DEFVAR def_declaracion . P_ENDDEF
+   14 def_declaracion: def_declaracion . declaracion DOS_P tipo_dato
+
+    ID        desplazar e ir al estado 34
+    P_ENDDEF  desplazar e ir al estado 63
+
+    declaracion  ir al estado 64
+
+
+estado 38
+
+   13 def_declaracion: declaracion . DOS_P tipo_dato
+   16 declaracion: declaracion . COMA ID
+
+    COMA   desplazar e ir al estado 61
+    DOS_P  desplazar e ir al estado 65
+
+
+estado 39
+
+   25 b_inList: P_INLIST PAR_A . ID COMA COR_A lista COR_C PAR_C
+
+    ID  desplazar e ir al estado 66
+
+
+estado 40
+
+   24 b_between: P_BETWEEN PAR_A . ID COMA COR_A expresion COMA expresion COR_C PAR_C
+
+    ID  desplazar e ir al estado 67
+
+
+estado 41
+
+    0 $accept: programa $end .
+
+    $default  aceptar
+
+
+estado 42
+
+    2 programa: programa sentencia .
+
+    $default  reduce usando la regla 2 (programa)
+
+
+estado 43
+
+   20 asignacion: ID OP_ASIG expresion .
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+
+    $default  reduce usando la regla 20 (asignacion)
+
+
+estado 44
+
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+   51 factor: PAR_A expresion . PAR_C
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+    PAR_C   desplazar e ir al estado 68
+
+
+estado 45
+
+   34 operador: OP_LOG_AND .
+
+    $default  reduce usando la regla 34 (operador)
+
+
+estado 46
+
+   35 operador: OP_LOG_OR .
+
+    $default  reduce usando la regla 35 (operador)
+
+
+estado 47
+
+   33 condicion: comparador operador . comparador
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    comparador  ir al estado 69
+    expresion   ir al estado 27
+    termino     ir al estado 28
+    factor      ir al estado 29
+
+
+estado 48
+
+   21 iterador: I_WHILE condicion LLA_A . programa LLA_C
+
+    ID         desplazar e ir al estado 1
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    programa     ir al estado 70
+    sentencia    ir al estado 11
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 49
+
+   42 expresion: expresion OP_SUM . termino
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    termino  ir al estado 71
+    factor   ir al estado 29
+
+
+estado 50
+
+   43 expresion: expresion OP_RES . termino
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    termino  ir al estado 72
+    factor   ir al estado 29
+
+
+estado 51
+
+   36 cmp: OP_CMP_mI .
+
+    $default  reduce usando la regla 36 (cmp)
+
+
+estado 52
+
+   37 cmp: OP_CMP_MI .
+
+    $default  reduce usando la regla 37 (cmp)
+
+
+estado 53
+
+   38 cmp: OP_CMP_m .
+
+    $default  reduce usando la regla 38 (cmp)
+
+
+estado 54
+
+   39 cmp: OP_CMP_M .
+
+    $default  reduce usando la regla 39 (cmp)
+
+
+estado 55
+
+   40 cmp: OP_CMP_IGUAL .
+
+    $default  reduce usando la regla 40 (cmp)
+
+
+estado 56
+
+   31 comparador: expresion cmp . expresion
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 73
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 57
+
+   45 termino: termino OP_MULT . factor
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    factor  ir al estado 74
+
+
+estado 58
+
+   46 termino: termino OP_DIV . factor
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    factor  ir al estado 75
+
+
+estado 59
+
+   22 condicional: I_IF condicion LLA_A . programa LLA_C
+   23            | I_IF condicion LLA_A . programa LLA_C I_ELSE LLA_A programa LLA_C
+
+    ID         desplazar e ir al estado 1
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    programa     ir al estado 76
+    sentencia    ir al estado 11
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 60
+
+    3 sentencia: P_DECVAR dec_declaracion P_ENDDEC .
+
+    $default  reduce usando la regla 3 (sentencia)
+
+
+estado 61
+
+   16 declaracion: declaracion COMA . ID
+
+    ID  desplazar e ir al estado 77
+
+
+estado 62
+
+   12 dec_declaracion: declaracion DOS_P . tipo_dato
+
+    T_ENTERO    desplazar e ir al estado 78
+    T_FLOTANTE  desplazar e ir al estado 79
+    T_STRING    desplazar e ir al estado 80
+
+    tipo_dato  ir al estado 81
+
+
+estado 63
+
+    4 sentencia: P_DEFVAR def_declaracion P_ENDDEF .
+
+    $default  reduce usando la regla 4 (sentencia)
+
+
+estado 64
+
+   14 def_declaracion: def_declaracion declaracion . DOS_P tipo_dato
+   16 declaracion: declaracion . COMA ID
+
+    COMA   desplazar e ir al estado 61
+    DOS_P  desplazar e ir al estado 82
+
+
+estado 65
+
+   13 def_declaracion: declaracion DOS_P . tipo_dato
+
+    T_ENTERO    desplazar e ir al estado 78
+    T_FLOTANTE  desplazar e ir al estado 79
+    T_STRING    desplazar e ir al estado 80
+
+    tipo_dato  ir al estado 83
+
+
+estado 66
+
+   25 b_inList: P_INLIST PAR_A ID . COMA COR_A lista COR_C PAR_C
+
+    COMA  desplazar e ir al estado 84
+
+
+estado 67
+
+   24 b_between: P_BETWEEN PAR_A ID . COMA COR_A expresion COMA expresion COR_C PAR_C
+
+    COMA  desplazar e ir al estado 85
+
+
+estado 68
+
+   51 factor: PAR_A expresion PAR_C .
+
+    $default  reduce usando la regla 51 (factor)
+
+
+estado 69
+
+   33 condicion: comparador operador comparador .
+
+    $default  reduce usando la regla 33 (condicion)
+
+
+estado 70
+
+    2 programa: programa . sentencia
+   21 iterador: I_WHILE condicion LLA_A programa . LLA_C
+
+    ID         desplazar e ir al estado 1
+    LLA_C      desplazar e ir al estado 86
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    sentencia    ir al estado 42
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 71
+
+   42 expresion: expresion OP_SUM termino .
+   45 termino: termino . OP_MULT factor
+   46        | termino . OP_DIV factor
+
+    OP_MULT  desplazar e ir al estado 57
+    OP_DIV   desplazar e ir al estado 58
+
+    $default  reduce usando la regla 42 (expresion)
+
+
+estado 72
+
+   43 expresion: expresion OP_RES termino .
+   45 termino: termino . OP_MULT factor
+   46        | termino . OP_DIV factor
+
+    OP_MULT  desplazar e ir al estado 57
+    OP_DIV   desplazar e ir al estado 58
+
+    $default  reduce usando la regla 43 (expresion)
+
+
+estado 73
+
+   31 comparador: expresion cmp expresion .
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+
+    $default  reduce usando la regla 31 (comparador)
+
+
+estado 74
+
+   45 termino: termino OP_MULT factor .
+
+    $default  reduce usando la regla 45 (termino)
+
+
+estado 75
+
+   46 termino: termino OP_DIV factor .
+
+    $default  reduce usando la regla 46 (termino)
+
+
+estado 76
+
+    2 programa: programa . sentencia
+   22 condicional: I_IF condicion LLA_A programa . LLA_C
+   23            | I_IF condicion LLA_A programa . LLA_C I_ELSE LLA_A programa LLA_C
+
+    ID         desplazar e ir al estado 1
+    LLA_C      desplazar e ir al estado 87
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    sentencia    ir al estado 42
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 77
+
+   16 declaracion: declaracion COMA ID .
+
+    $default  reduce usando la regla 16 (declaracion)
+
+
+estado 78
+
+   17 tipo_dato: T_ENTERO .
+
+    $default  reduce usando la regla 17 (tipo_dato)
+
+
+estado 79
+
+   19 tipo_dato: T_FLOTANTE .
+
+    $default  reduce usando la regla 19 (tipo_dato)
+
+
+estado 80
+
+   18 tipo_dato: T_STRING .
+
+    $default  reduce usando la regla 18 (tipo_dato)
+
+
+estado 81
+
+   12 dec_declaracion: declaracion DOS_P tipo_dato .
+
+    $default  reduce usando la regla 12 (dec_declaracion)
+
+
+estado 82
+
+   14 def_declaracion: def_declaracion declaracion DOS_P . tipo_dato
+
+    T_ENTERO    desplazar e ir al estado 78
+    T_FLOTANTE  desplazar e ir al estado 79
+    T_STRING    desplazar e ir al estado 80
+
+    tipo_dato  ir al estado 88
+
+
+estado 83
+
+   13 def_declaracion: declaracion DOS_P tipo_dato .
+
+    $default  reduce usando la regla 13 (def_declaracion)
+
+
+estado 84
+
+   25 b_inList: P_INLIST PAR_A ID COMA . COR_A lista COR_C PAR_C
+
+    COR_A  desplazar e ir al estado 89
+
+
+estado 85
+
+   24 b_between: P_BETWEEN PAR_A ID COMA . COR_A expresion COMA expresion COR_C PAR_C
+
+    COR_A  desplazar e ir al estado 90
+
+
+estado 86
+
+   21 iterador: I_WHILE condicion LLA_A programa LLA_C .
+
+    $default  reduce usando la regla 21 (iterador)
+
+
+estado 87
+
+   22 condicional: I_IF condicion LLA_A programa LLA_C .
+   23            | I_IF condicion LLA_A programa LLA_C . I_ELSE LLA_A programa LLA_C
+
+    I_ELSE  desplazar e ir al estado 91
+
+    $default  reduce usando la regla 22 (condicional)
+
+
+estado 88
+
+   14 def_declaracion: def_declaracion declaracion DOS_P tipo_dato .
+
+    $default  reduce usando la regla 14 (def_declaracion)
+
+
+estado 89
+
+   25 b_inList: P_INLIST PAR_A ID COMA COR_A . lista COR_C PAR_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    lista      ir al estado 92
+    expresion  ir al estado 93
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 90
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A . expresion COMA expresion COR_C PAR_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 94
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 91
+
+   23 condicional: I_IF condicion LLA_A programa LLA_C I_ELSE . LLA_A programa LLA_C
+
+    LLA_A  desplazar e ir al estado 95
+
+
+estado 92
+
+   25 b_inList: P_INLIST PAR_A ID COMA COR_A lista . COR_C PAR_C
+   30 lista: lista . PUNTO_COMA expresion
+
+    COR_C       desplazar e ir al estado 96
+    PUNTO_COMA  desplazar e ir al estado 97
+
+
+estado 93
+
+   29 lista: expresion .
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+
+    $default  reduce usando la regla 29 (lista)
+
+
+estado 94
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion . COMA expresion COR_C PAR_C
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+    COMA    desplazar e ir al estado 98
+
+
+estado 95
+
+   23 condicional: I_IF condicion LLA_A programa LLA_C I_ELSE LLA_A . programa LLA_C
+
+    ID         desplazar e ir al estado 1
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    programa     ir al estado 99
+    sentencia    ir al estado 11
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 96
+
+   25 b_inList: P_INLIST PAR_A ID COMA COR_A lista COR_C . PAR_C
+
+    PAR_C  desplazar e ir al estado 100
+
+
+estado 97
+
+   30 lista: lista PUNTO_COMA . expresion
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 101
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 98
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion COMA . expresion COR_C PAR_C
+
+    ID          desplazar e ir al estado 20
+    PAR_A       desplazar e ir al estado 21
+    C_FLOTANTE  desplazar e ir al estado 22
+    C_CADENA    desplazar e ir al estado 23
+    C_ENTERO    desplazar e ir al estado 24
+
+    expresion  ir al estado 102
+    termino    ir al estado 28
+    factor     ir al estado 29
+
+
+estado 99
+
+    2 programa: programa . sentencia
+   23 condicional: I_IF condicion LLA_A programa LLA_C I_ELSE LLA_A programa . LLA_C
+
+    ID         desplazar e ir al estado 1
+    LLA_C      desplazar e ir al estado 103
+    I_WHILE    desplazar e ir al estado 2
+    I_IF       desplazar e ir al estado 3
+    P_WRITE    desplazar e ir al estado 4
+    P_READ     desplazar e ir al estado 5
+    P_DECVAR   desplazar e ir al estado 6
+    P_DEFVAR   desplazar e ir al estado 7
+    P_INLIST   desplazar e ir al estado 8
+    P_BETWEEN  desplazar e ir al estado 9
+
+    sentencia    ir al estado 42
+    asignacion   ir al estado 12
+    iterador     ir al estado 13
+    condicional  ir al estado 14
+    b_between    ir al estado 15
+    b_inList     ir al estado 16
+    b_write      ir al estado 17
+    b_read       ir al estado 18
+
+
+estado 100
+
+   25 b_inList: P_INLIST PAR_A ID COMA COR_A lista COR_C PAR_C .
+
+    $default  reduce usando la regla 25 (b_inList)
+
+
+estado 101
+
+   30 lista: lista PUNTO_COMA expresion .
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+
+    $default  reduce usando la regla 30 (lista)
+
+
+estado 102
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion COMA expresion . COR_C PAR_C
+   42 expresion: expresion . OP_SUM termino
+   43          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 49
+    OP_RES  desplazar e ir al estado 50
+    COR_C   desplazar e ir al estado 104
+
+
+estado 103
+
+   23 condicional: I_IF condicion LLA_A programa LLA_C I_ELSE LLA_A programa LLA_C .
+
+    $default  reduce usando la regla 23 (condicional)
+
+
+estado 104
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion COMA expresion COR_C . PAR_C
+
+    PAR_C  desplazar e ir al estado 105
+
+
+estado 105
+
+   24 b_between: P_BETWEEN PAR_A ID COMA COR_A expresion COMA expresion COR_C PAR_C .
+
+    $default  reduce usando la regla 24 (b_between)

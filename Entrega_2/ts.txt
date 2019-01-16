@@ -1,0 +1,5 @@
+                  NOMBRE                     TIPO      VALOR                    				LONGITUD      ZONA   
+ _2                                        INT         2                                                    
+ _23                                       INT         23                                                   
+ _3                                        INT         3                                                    
+ _"Hola mundo"                             STRING      "Hola mundo"                              12         
